@@ -27,7 +27,7 @@ public class IncomeService {
         if (username.equals("admin")){
             List<Income> incomeList = incomeRepository.findAll();
             if (incomeList.isEmpty()){
-                return new ApiResponse("Transaksiya amalga oshmagan!",false);
+                return new ApiResponse("Tr  ansaksiya amalga oshmagan!",false);
 
             }
             return new ApiResponse("Successfully",true);
