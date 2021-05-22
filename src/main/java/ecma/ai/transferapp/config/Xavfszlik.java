@@ -52,7 +52,6 @@ public class Xavfszlik extends WebSecurityConfigurerAdapter {
 
     }
 
-
     @Bean
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {

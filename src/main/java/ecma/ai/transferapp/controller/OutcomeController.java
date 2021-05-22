@@ -23,9 +23,9 @@ public class OutcomeController {
     OutcomeService outcomeService;
 
     @GetMapping
-    public HttpEntity<?> findAll() {
-        List<Outcome> all = outcomeService.findAll();
-        return ResponseEntity.ok(all);
+    public HttpEntity<?> getOutcome(HttpServletRequest httpServletRequest) {
+        ApiResponse response = outcomeService.getOutcome(httpServletRequest);
+        return ResponseEntity.status(response.isSuccess() ? 200 : 409).body(response);
     }
 
     @GetMapping("{id}")

@@ -90,9 +90,27 @@ public class OutcomeService {
         return new ApiResponse("Successfully!!!", true);
     }
 
-    public List<Outcome> findAll() {
-        return outcomeRepository.findAll();
+    public ApiResponse getOutcome(HttpServletRequest httpServletRequest) {
+        String token = httpServletRequest.getHeader("Authorization");
+
+        token = token.substring(7);
+
+        String username = jwtProvider.getUsernameFromToken(token);
+
+        if (username.equals("admin")) {
+            List<Outcome> outcomeList = outcomeRepository.findAll();
+            if (outcomeList.isEmpty()) {
+                return new ApiResponse("Transaksiya amalag oshmagan", false);
+            }
+            return new ApiResponse("Successfully", true);
+        }
+        List<Outcome> outcomes = outcomeRepository.findOutcomes(username);
+        if (outcomes.isEmpty()) {
+            return new ApiResponse("Transaksiya amalga oshmagan!", false);
+        }
+        return new ApiResponse("Successfully!", true);
     }
+
 
     public Outcome findById(Integer id) {
         Optional<Outcome> optionalOutcome = outcomeRepository.findById(id);
